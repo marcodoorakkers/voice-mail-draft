@@ -16,7 +16,8 @@ export async function POST(req: NextRequest) {
       {
         role: "user",
         content: `Je krijgt een gesproken bericht dat iemand wil omzetten naar een e-mail.
-Maak er een nette, professionele e-mail van.
+Verwerk ALLE inhoud uit het gesproken bericht in de mail — laat niets weg en vat niet samen.
+Maak er een nette, professionele e-mail van met correcte alinea's en zinsbouw.
 Geef het resultaat terug als JSON met de velden "subject" en "body".
 Gebruik dezelfde taal als het ingesproken bericht.
 
