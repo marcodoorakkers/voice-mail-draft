@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
   }
 
   const { error } = await resend.emails.send({
-    from: "Voice Mail Draft <onboarding@resend.dev>",
+    from: "Voice Mail Draft <startwithadraft@business-xl.nl>",
     to,
     subject: `[CONCEPT] ${subject}`,
     text: body,
