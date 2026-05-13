@@ -9,6 +9,8 @@ export default function Home() {
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
   const [body, setBody] = useState("");
+  const [transcript, setTranscript] = useState("");
+  const [showTranscript, setShowTranscript] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
   const mediaRecorder = useRef<MediaRecorder | null>(null);
@@ -49,6 +51,7 @@ export default function Home() {
       });
       const { text, error: transcribeError } = await transcribeRes.json();
       if (transcribeError) throw new Error(transcribeError);
+      setTranscript(text);
 
       const generateRes = await fetch("/api/generate-email", {
         method: "POST",
@@ -140,6 +143,17 @@ export default function Home() {
 
         {step === "preview" && (
           <div className="flex flex-col gap-4">
+            <div>
+              <button
+                onClick={() => setShowTranscript(!showTranscript)}
+                className="text-xs text-blue-500 hover:underline mb-2"
+              >
+                {showTranscript ? "Verberg transcriptie" : "Toon ruwe transcriptie"}
+              </button>
+              {showTranscript && (
+                <p className="text-xs text-gray-500 bg-gray-50 rounded-lg p-3 border border-gray-200 whitespace-pre-wrap">{transcript}</p>
+              )}
+            </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Onderwerp</label>
               <input
